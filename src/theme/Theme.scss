@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap');
+$PRIMARYFONT: 'Roboto', sans-serif;
+$SECONDARYFONT: 'Balsamiq Sans', cursive;
+
+@mixin for-size($size) {
+  @if $size==phone-only {
+    @media (max-width: 599px) {
+      @content;
+    }
+  } @else if $size==tablet-portrait-up {
+    @media (min-width: 600px) {
+      @content;
+    }
+  } @else if $size==desktop-up {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  }
+}
+
+$PRIMARY: #537fa5;
+$SECONDARY: #136f63;
+$TERTIARY: #b55d5d;
+$DANGER: #e74c3c;
+$WARNING: #ffba08;
+$SUCCESS: #9ed100;
+$BLACK: #000000;
+$WHITE: #ffffff;
+$GRAY: #707070;
+$DARKGRAY: #353531;
+$DARKBLUE: #282c34;
+$YELLOW: #ffcf2a;
+
+$mobileFontS: 14px;
+$mobileFontM: 16px;
+$mobileFontL: 18px;
+$mobileFontXL: 22px;
+$mobileFontXXL: 30px;
+
+$desktopFontS: 14px;
+$desktopFontM: 18px;
+$desktopFontL: 22px;
+$desktopFontXL: 26px;
+$desktopFontXXL: 34px;

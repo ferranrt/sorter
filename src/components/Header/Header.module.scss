@@ -1,0 +1,30 @@
+@import 'src/theme/Theme.scss';
+
+.root {
+  font-family: $PRIMARYFONT;
+  background-color: $YELLOW;
+  padding: 25px;
+  display: flex;
+  flex-direction: row;
+  .algorithmContainer {
+  }
+  .slidersContainer {
+  }
+  .actionsContainer {
+  }
+  .column {
+    flex-grow: 1;
+    text-align: center;
+  }
+  select {
+    option {
+      padding: 10px;
+      background-color: $WHITE;
+      color: $BLACK;
+    }
+  }
+  button {
+    padding: 10px;
+    border: none;
+  }
+}

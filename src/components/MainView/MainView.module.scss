@@ -2,6 +2,7 @@
 
 .root {
   background-color: $DARKBLUE;
-  height: 95%;
-  width: 95%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }

@@ -1,33 +1,70 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+import React, { useEffect } from 'react';
+import classnames from 'classnames';
+import PropTypes from 'prop-types';
 import styles from './Header.module.scss';
+import Picker from '../Picker/Picker';
 
-export default function Header() {
+export default function Header(props) {
+  const {
+    onChangeSortingSize,
+    onChangeSortingSpeed,
+    onStartSorting,
+    onRebuildArray,
+    onChangeAlgorithm,
+  } = props;
+
   return (
     <div className={styles.root}>
-      <div className={styles.column}>
-        <label htmlFor="algorithm">Choose a car:</label>
-        <select id="algorithm">
-          <option value="insertion">Insertion Sort</option>
-          <option value="selection">Selection Sort</option>
-          <option value="merge">Merge Sort</option>
-          <option value="heap">Heap Sort</option>
-          <option value="quick">Quick Sort</option>
-          <option value="bubble">Bubble Sort</option>
-        </select>
+      <div className={classnames(styles.column, styles.algorithmContainer)}>
+        <div className={styles.box}>
+          <select
+            defaultValue={'null'}
+            onChange={onChangeAlgorithm}
+            className={styles.algorithmPicker}
+          >
+            <option value="null" disabled>
+              Choose algorithm
+            </option>
+            <option value="insertion">Insertion Sort</option>
+            <option value="selection">Selection Sort</option>
+            <option value="merge">Merge Sort</option>
+            <option value="heap">Heap Sort</option>
+            <option value="quick">Quick Sort</option>
+            <option value="bubble">Bubble Sort</option>
+          </select>
+        </div>
       </div>
-      <div className={styles.column}>
-        <input type="range" min="1" max="100" className="slider" id="myRange" />
-        <input type="range" min="1" max="100" className="slider" id="myRange" />
+
+      <div className={classnames(styles.column, styles.slidersContainer)}>
+        <Picker onChangeValue={onChangeSortingSize} label="Array Size" />
+        <Picker label="Speed Transition " />
       </div>
-      <div className={styles.column}>
-        <button type="button">
-          <span>Rebuild Array</span>
+
+      <div className={classnames(styles.column, styles.actionsContainer)}>
+        <button onClick={onRebuildArray} type="button">
+          <span>REBUILD Array</span>
         </button>
-        <button type="button">
+        <button onClick={() => onStartSorting()} type="button">
           <span>RUN Sorting</span>
         </button>
       </div>
     </div>
   );
 }
+
+Header.defaultProps = {
+  onChangeSortingSize: () => {},
+  onChangeSortingSpeed: () => {},
+  onChangeAlgorithm: () => {},
+  onRebuildArray: () => {},
+  onStartSorting: () => {},
+};
+
+Header.propTypes = {
+  onChangeSortingSize: PropTypes.func,
+  onChangeSortingSpeed: PropTypes.func,
+  onRebuildArray: PropTypes.func,
+  onChangeAlgorithm: PropTypes.func,
+  onStartSorting: () => {},
+};

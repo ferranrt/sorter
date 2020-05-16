@@ -1,0 +1,44 @@
+@import 'src/theme/Theme.scss';
+
+.root {
+  display: flex;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+  .slider {
+    -webkit-appearance: none; /* Override default CSS styles */
+    appearance: none;
+    margin-left: 25px;
+    margin-right: 25px;
+    height: 15px;
+    border-radius: 10px; /* Specified height */
+    background: white; /* Grey background */
+    outline: none; /* Remove outline */
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 15px;
+      height: 15px;
+      border-radius: 50px;
+      background: $DANGER;
+      cursor: pointer;
+    }
+    &::-moz-range-thumb {
+      width: 15px;
+      height: 15px;
+      background: $DANGER;
+      cursor: pointer;
+    }
+  }
+  .label {
+    font-weight: bold;
+    margin-top: 10px;
+    span {
+      font-size: $desktopFontXL;
+      margin-left: 15px;
+    }
+  }
+}

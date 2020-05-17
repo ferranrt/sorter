@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './Picker.module.scss';
 
 export default function Picker(props) {
-  const { label, min, max, value, onChangeValue } = props;
+  const { label, min, max, value, onChangeValue, sufix } = props;
   const [displayValue, setDisplayValue] = useState(value);
   const handleValueChange = (event) => {
     setDisplayValue(event.target.value);
@@ -21,6 +21,7 @@ export default function Picker(props) {
       <p className={styles.label}>
         {`${label}:`}
         <span>{displayValue}</span>
+        {` ${sufix}`}
       </p>
     </div>
   );
@@ -31,6 +32,7 @@ Picker.defaultProps = {
   min: 1,
   max: 100,
   value: 50,
+  sufix: '',
   onChangeValue: () => {},
 };
 Picker.propTypes = {
@@ -39,4 +41,5 @@ Picker.propTypes = {
   max: PropTypes.number,
   value: PropTypes.number,
   onChangeValue: PropTypes.func,
+  sufix: PropTypes.string,
 };

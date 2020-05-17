@@ -19,7 +19,7 @@ export default function Header(props) {
       <div className={classnames(styles.column, styles.algorithmContainer)}>
         <div className={styles.box}>
           <select
-            defaultValue={'null'}
+            defaultValue="null"
             onChange={onChangeAlgorithm}
             className={styles.algorithmPicker}
           >
@@ -28,7 +28,6 @@ export default function Header(props) {
             </option>
             <option value="insertion">Insertion Sort</option>
             <option value="selection">Selection Sort</option>
-            <option value="merge">Merge Sort</option>
             <option value="heap">Heap Sort</option>
             <option value="quick">Quick Sort</option>
             <option value="bubble">Bubble Sort</option>
@@ -37,8 +36,20 @@ export default function Header(props) {
       </div>
 
       <div className={classnames(styles.column, styles.slidersContainer)}>
-        <Picker onChangeValue={onChangeSortingSize} label="Array Size" />
-        <Picker label="Speed Transition " />
+        <Picker
+          min={5}
+          max={300}
+          onChangeValue={onChangeSortingSize}
+          label="Array Size"
+          sufix="items"
+        />
+        <Picker
+          onChangeValue={onChangeSortingSpeed}
+          min={5}
+          max={300}
+          label="Speed Transition "
+          sufix="ms"
+        />
       </div>
 
       <div className={classnames(styles.column, styles.actionsContainer)}>

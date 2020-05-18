@@ -28,7 +28,7 @@ export default function Header(props) {
             </option>
             <option value="insertion">Insertion Sort</option>
             <option value="selection">Selection Sort</option>
-            <option value="heap">Heap Sort</option>
+            {/* <option value="heap">Heap Sort</option> */}
             <option value="quick">Quick Sort</option>
             <option value="bubble">Bubble Sort</option>
           </select>

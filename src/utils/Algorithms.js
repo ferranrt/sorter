@@ -70,41 +70,53 @@ export const SelectionSort = async (array, updateCallback, delay) => {
   Promise.all(promises);
 };
 
-const partition = async (items, left, right, updateCallback, delay, speed) => {
-  const newArray = items;
-  const pivot = newArray[Math.floor((right + left) / 2)]; // middle element
-  let i = left; // left pointer
-  let j = right; // right pointer
-  while (i <= j) {
-    while (newArray[i] < pivot) {
-      i += 1;
-    }
-    while (newArray[j] > pivot) {
-      j -= 1;
-    }
-    if (i <= j) {
-      const temp = newArray[left];
-      newArray[left] = newArray[right];
-      newArray[right] = temp;
-      // eslint-disable-next-line no-await-in-loop
-      await sleep(updateCallback, [...newArray], delay * speed); // sawpping two elements
-      i += 1;
-      j -= 1;
-    }
+const defaultComparator = (a, b) => {
+  if (a < b) {
+    return -1;
   }
-  return i;
+  if (a > b) {
+    return 1;
+  }
+  return 0;
 };
 
-export function QuickSort(items, left, right, updateCallback, speed, delay) {
-  let index;
-  if (items.length > 1) {
-    index = partition(items, left, right, updateCallback, delay, speed);
-    if (left < index - 1) {
-      QuickSort([...items], left, index - 1, updateCallback, delay + 1, speed);
+export const QuickSort = (
+  unsortedArray,
+  updateCallback,
+  speed,
+  comparator = defaultComparator,
+) => {
+  const sortedArray = [...unsortedArray];
+  const promises = [];
+  let delayOffset = 1;
+  const recursiveSort = (start, end) => {
+    if (end - start < 1) {
+      return;
     }
-    if (index < right) {
-      QuickSort([...items], index, right, updateCallback, delay + 1, speed);
+    const pivotValue = sortedArray[end];
+    let splitIndex = start;
+    for (let i = start; i < end; i += 1) {
+      const sort = comparator(sortedArray[i], pivotValue);
+      if (sort === -1) {
+        if (splitIndex !== i) {
+          const temp = sortedArray[splitIndex];
+          sortedArray[splitIndex] = sortedArray[i];
+          sortedArray[i] = temp;
+          delayOffset += 1;
+          promises.push(
+            sleep(updateCallback, [...sortedArray], speed * delayOffset),
+          );
+        }
+        splitIndex += 1;
+      }
     }
-  }
-  return items;
-}
+    sortedArray[end] = sortedArray[splitIndex];
+    sortedArray[splitIndex] = pivotValue;
+    delayOffset += 1;
+    promises.push(sleep(updateCallback, [...sortedArray], speed * delayOffset));
+    recursiveSort(start, splitIndex - 1);
+    recursiveSort(splitIndex + 1, end);
+  };
+  recursiveSort(0, unsortedArray.length - 1);
+  Promise.all(promises);
+};

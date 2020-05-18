@@ -34,14 +34,7 @@ export default function MainView() {
   const handleStartSorting = () => {
     if (currentAlgorith === null) {
       // alert('No algorithm selected');
-      QuickSort(
-        boardData,
-        0,
-        boardData.length - 1,
-        setBoardData,
-        sortingSpeed,
-        1,
-      );
+      QuickSort(boardData, setBoardData, sortingSpeed);
     } else {
       switch (currentAlgorith) {
         case 'selection':
@@ -54,23 +47,13 @@ export default function MainView() {
           InsertSort(boardData, setBoardData, sortingSpeed);
           break;
         case 'quick':
-          QuickSort(
-            boardData,
-            0,
-            boardData.length - 1,
-            setBoardData,
-            sortingSpeed,
-            1,
-          );
+          QuickSort(boardData, setBoardData, sortingSpeed);
           break;
         default:
           SelectionSort(boardData, setBoardData, sortingSpeed);
           break;
       }
     }
-
-    console.log('Must start sorting with: ', currentAlgorith);
-    console.log('Sorting Speed: ', sortingSpeed);
   };
 
   const handleRebuidArray = () => {

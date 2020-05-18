@@ -1,7 +1,11 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect } from 'react';
+import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
 import styles from './Header.module.scss';
 import Picker from '../Picker/Picker';
 
@@ -12,33 +16,31 @@ export default function Header(props) {
     onStartSorting,
     onRebuildArray,
     onChangeAlgorithm,
+    defaultSpeed,
+    defaultSize,
   } = props;
 
   return (
     <div className={styles.root}>
       <div className={classnames(styles.column, styles.algorithmContainer)}>
         <div className={styles.box}>
-          <select
-            defaultValue="null"
-            onChange={onChangeAlgorithm}
-            className={styles.algorithmPicker}
-          >
-            <option value="null" disabled>
-              Choose algorithm
-            </option>
-            <option value="insertion">Insertion Sort</option>
-            <option value="selection">Selection Sort</option>
-            {/* <option value="heap">Heap Sort</option> */}
-            <option value="quick">Quick Sort</option>
-            <option value="bubble">Bubble Sort</option>
-          </select>
+          <Select defaultValue="null" onChange={onChangeAlgorithm}>
+            <MenuItem value="null" disabled>
+              Choose a sorting algorithm
+            </MenuItem>
+            <MenuItem value="insertion">Insertion Sort</MenuItem>
+            <MenuItem value="selection">Selection Sort</MenuItem>
+            <MenuItem value="quick">Quick Sort</MenuItem>
+            <MenuItem value="bubble">Bubble Sort</MenuItem>
+          </Select>
         </div>
       </div>
 
       <div className={classnames(styles.column, styles.slidersContainer)}>
         <Picker
           min={5}
-          max={300}
+          max={200}
+          def={defaultSize}
           onChangeValue={onChangeSortingSize}
           label="Array Size"
           sufix="items"
@@ -46,19 +48,31 @@ export default function Header(props) {
         <Picker
           onChangeValue={onChangeSortingSpeed}
           min={5}
-          max={300}
+          max={50}
+          def={defaultSpeed}
           label="Speed Transition "
           sufix="ms"
         />
       </div>
 
       <div className={classnames(styles.column, styles.actionsContainer)}>
-        <button onClick={onRebuildArray} type="button">
-          <span>REBUILD Array</span>
-        </button>
-        <button onClick={() => onStartSorting()} type="button">
-          <span>RUN Sorting</span>
-        </button>
+        <Button
+          onClick={onRebuildArray}
+          variant="contained"
+          color="primary"
+          startIcon={<Icon>build</Icon>}
+        >
+          REBUILD
+        </Button>
+        <Button
+          onClick={onStartSorting}
+          variant="contained"
+          color="secondary"
+          startIcon={<Icon>sort</Icon>}
+          className={styles.run}
+        >
+          RUN SORTING
+        </Button>
       </div>
     </div>
   );
@@ -70,6 +84,8 @@ Header.defaultProps = {
   onChangeAlgorithm: () => {},
   onRebuildArray: () => {},
   onStartSorting: () => {},
+  defaultSpeed: 25,
+  defaultSize: 50,
 };
 
 Header.propTypes = {
@@ -77,5 +93,7 @@ Header.propTypes = {
   onChangeSortingSpeed: PropTypes.func,
   onRebuildArray: PropTypes.func,
   onChangeAlgorithm: PropTypes.func,
-  onStartSorting: () => {},
+  onStartSorting: PropTypes.func,
+  defaultSpeed: PropTypes.number,
+  defaultSize: PropTypes.number,
 };

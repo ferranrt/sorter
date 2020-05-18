@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import styles from './MainView.module.scss';
-import Header from '../Header/Header';
+
 import Board from '../Board/Board';
+import Header from '../Header/Header';
+import styles from './MainView.module.scss';
 import {
   SelectionSort,
   BubbleSort,
@@ -11,7 +12,7 @@ import {
 
 export default function MainView() {
   const [sortingElements, setSortingElements] = useState(50);
-  const [sortingSpeed, setSortingSpeed] = useState(50);
+  const [sortingSpeed, setSortingSpeed] = useState(20);
   const [currentAlgorith, setCurrentAlgorithm] = useState(null);
   const [boardData, setBoardData] = useState(
     Array.from({ length: sortingElements }, () =>
@@ -33,8 +34,7 @@ export default function MainView() {
 
   const handleStartSorting = () => {
     if (currentAlgorith === null) {
-      // alert('No algorithm selected');
-      QuickSort(boardData, setBoardData, sortingSpeed);
+      alert('No algorithm selected.');
     } else {
       switch (currentAlgorith) {
         case 'selection':
@@ -76,6 +76,8 @@ export default function MainView() {
         onRebuildArray={handleRebuidArray}
         onChangeAlgorithm={handleChangeAlgorithm}
         onStartSorting={handleStartSorting}
+        defaultSpeed={sortingSpeed}
+        defaultSize={sortingElements}
       />
       <Board data={boardData} speed={sortingSpeed} />
     </div>

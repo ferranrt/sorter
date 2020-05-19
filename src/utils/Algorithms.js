@@ -121,6 +121,42 @@ export const QuickSort = (
   Promise.all(promises);
 };
 
+export const CycleSort = (unsortedArray, updateCallback, speed) => {
+  const newArray = [...unsortedArray];
+  let delayOffset = 1;
+  const promises = [];
+  for (let cycleStart = 0; cycleStart < newArray.length - 1; cycleStart += 1) {
+    let item = newArray[cycleStart];
+    let pos = cycleStart;
+    for (let i = cycleStart + 1; i < newArray.length; i++) {
+      if (newArray[i] < item) pos += 1;
+    }
+    if (pos === cycleStart) continue;
+    while (item === newArray[pos]) {
+      pos += 1;
+    }
+    const swap = newArray[pos];
+    newArray[pos] = item;
+    item = swap;
+    delayOffset += 1;
+    promises.push(sleep(updateCallback, [...newArray], speed * delayOffset));
+    while (pos !== cycleStart) {
+      pos = cycleStart;
+      for (let i = cycleStart + 1; i < newArray.length; i++) {
+        if (newArray[i] < item) pos += 1;
+      }
+      while (item === newArray[pos]) {
+        pos += 1;
+      }
+      const aux = newArray[pos];
+      newArray[pos] = item;
+      item = aux;
+      delayOffset += 1;
+      promises.push(sleep(updateCallback, [...newArray], speed * delayOffset));
+    }
+  }
+};
+
 export const ComboSort = (unsortedArray, updateCallback, speed) => {
   const newArray = [...unsortedArray];
   const promises = [];

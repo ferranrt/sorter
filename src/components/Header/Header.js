@@ -31,6 +31,7 @@ export default function Header(props) {
             <MenuItem value="selection">Selection Sort</MenuItem>
             <MenuItem value="quick">Quick Sort</MenuItem>
             <MenuItem value="bubble">Bubble Sort</MenuItem>
+            <MenuItem value="cycle">Cycle Sort</MenuItem>
             <MenuItem value="combo">Combo Sort</MenuItem>
           </Select>
         </div>

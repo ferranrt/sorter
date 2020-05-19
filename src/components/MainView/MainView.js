@@ -11,6 +11,7 @@ import {
   ComboSort,
   CycleSort,
   BogoSort,
+  ShellSort,
 } from '../../utils/Algorithms';
 
 export default function MainView() {
@@ -56,6 +57,9 @@ export default function MainView() {
           break;
         case 'cycle':
           CycleSort(boardData, setBoardData, sortingSpeed);
+          break;
+        case 'shell':
+          ShellSort(boardData, setBoardData, sortingSpeed);
           break;
         default:
           SelectionSort(boardData, setBoardData, sortingSpeed);

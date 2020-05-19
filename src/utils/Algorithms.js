@@ -239,3 +239,33 @@ export const BogoSort = (unsortedArray, updateCallback, speed) => {
   };
   return sort(newArray);
 };
+
+export const ShellSort = (unsortedArray, updateCallback, speed) => {
+  const newArray = [...unsortedArray];
+  let increment = newArray.length / 2;
+  const promises = [];
+  let delayOffset = 1;
+  while (increment > 0) {
+    for (let i = increment; i < newArray.length; i += 1) {
+      let j = i;
+      const temp = newArray[i];
+      while (j >= increment && newArray[j - increment] > temp) {
+        newArray[j] = newArray[j - increment];
+        promises.push(
+          sleep(updateCallback, [...newArray], speed * delayOffset),
+        );
+        delayOffset += 1;
+        j -= increment;
+      }
+
+      newArray[j] = temp;
+    }
+
+    if (increment === 2) {
+      increment = 1;
+    } else {
+      increment = parseInt((increment * 5) / 11);
+    }
+  }
+  Promise.all(promises);
+};

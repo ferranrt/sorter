@@ -28,12 +28,13 @@ export default function Header(props) {
             <MenuItem value="null" disabled>
               Choose a sorting algorithm
             </MenuItem>
-            <MenuItem value="insertion">Insertion Sort</MenuItem>
-            <MenuItem value="selection">Selection Sort</MenuItem>
-            <MenuItem value="quick">Quick Sort</MenuItem>
             <MenuItem value="bubble">Bubble Sort</MenuItem>
-            <MenuItem value="cycle">Cycle Sort</MenuItem>
             <MenuItem value="combo">Combo Sort</MenuItem>
+            <MenuItem value="cycle">Cycle Sort</MenuItem>
+            <MenuItem value="insertion">Insertion Sort</MenuItem>
+            <MenuItem value="quick">Quick Sort</MenuItem>
+            <MenuItem value="selection">Selection Sort</MenuItem>
+            <MenuItem value="shell">Shell Sort</MenuItem>
             <Divider />
             <MenuItem value="bogo">
               Bogo Sort (

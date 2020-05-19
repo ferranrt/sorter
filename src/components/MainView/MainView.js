@@ -10,6 +10,7 @@ import {
   QuickSort,
   ComboSort,
   CycleSort,
+  BogoSort,
 } from '../../utils/Algorithms';
 
 export default function MainView() {
@@ -32,8 +33,7 @@ export default function MainView() {
 
   const handleStartSorting = () => {
     if (currentAlgorith === null) {
-      CycleSort(boardData, setBoardData, sortingSpeed);
-      // alert('No algorithm selected.');
+      alert('No algorithm selected.');
     } else {
       switch (currentAlgorith) {
         case 'selection':
@@ -50,6 +50,9 @@ export default function MainView() {
           break;
         case 'combo':
           ComboSort(boardData, setBoardData, sortingSpeed);
+          break;
+        case 'bogo':
+          BogoSort(boardData, setBoardData, sortingSpeed);
           break;
         case 'cycle':
           CycleSort(boardData, setBoardData, sortingSpeed);

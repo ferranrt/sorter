@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Board.module.scss';
 
+// eslint-disable-next-line no-unused-vars
 const generateKey = (pre) => {
   return `${pre}_${new Date().getTime()}`;
 };
@@ -15,7 +16,8 @@ export default function Board(props) {
         return (
           <p
             style={{ height: `${(100 / data.length) * item}%` }}
-            key={generateKey(index)}
+            // eslint-disable-next-line react/no-array-index-key
+            key={`${index}-${item}`}
           />
         );
       })}
@@ -28,5 +30,5 @@ Board.defaultProps = {
 };
 
 Board.propTypes = {
-  data: PropTypes.array,
+  data: PropTypes.instanceOf(Array),
 };

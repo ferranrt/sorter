@@ -5,6 +5,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
+import Divider from '@material-ui/core/Divider';
 import styles from './Header.module.scss';
 import Slider from '../MySlider/MySlider';
 
@@ -33,6 +34,14 @@ export default function Header(props) {
             <MenuItem value="bubble">Bubble Sort</MenuItem>
             <MenuItem value="cycle">Cycle Sort</MenuItem>
             <MenuItem value="combo">Combo Sort</MenuItem>
+            <Divider />
+            <MenuItem value="bogo">
+              Bogo Sort (
+              <span aria-label="boom" role="img">
+                💥
+              </span>
+              )
+            </MenuItem>
           </Select>
         </div>
       </div>

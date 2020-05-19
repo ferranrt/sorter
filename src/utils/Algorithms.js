@@ -128,9 +128,10 @@ export const CycleSort = (unsortedArray, updateCallback, speed) => {
   for (let cycleStart = 0; cycleStart < newArray.length - 1; cycleStart += 1) {
     let item = newArray[cycleStart];
     let pos = cycleStart;
-    for (let i = cycleStart + 1; i < newArray.length; i++) {
+    for (let i = cycleStart + 1; i < newArray.length; i += 1) {
       if (newArray[i] < item) pos += 1;
     }
+    // eslint-disable-next-line no-continue
     if (pos === cycleStart) continue;
     while (item === newArray[pos]) {
       pos += 1;
@@ -142,7 +143,7 @@ export const CycleSort = (unsortedArray, updateCallback, speed) => {
     promises.push(sleep(updateCallback, [...newArray], speed * delayOffset));
     while (pos !== cycleStart) {
       pos = cycleStart;
-      for (let i = cycleStart + 1; i < newArray.length; i++) {
+      for (let i = cycleStart + 1; i < newArray.length; i += 1) {
         if (newArray[i] < item) pos += 1;
       }
       while (item === newArray[pos]) {
@@ -163,7 +164,7 @@ export const ComboSort = (unsortedArray, updateCallback, speed) => {
   let delayOffset = 1;
   const isArraySorted = (arr) => {
     let sorted = true;
-    for (let i = 0; i < arr.length - 1; i++) {
+    for (let i = 0; i < arr.length - 1; i += 1) {
       if (arr[i] > arr[i + 1]) {
         sorted = false;
         break;
@@ -195,4 +196,46 @@ export const ComboSort = (unsortedArray, updateCallback, speed) => {
     iterationCount += 1;
   }
   Promise.all(promises);
+};
+
+export const BogoSort = (unsortedArray, updateCallback, speed) => {
+  let newArray = [...unsortedArray];
+  const isSorted = (arr) => {
+    for (let i = 1; i < arr.length; i += 1) {
+      if (arr[i - 1] > arr[i]) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  const shuffle = (arr) => {
+    let count = newArray.length;
+    let temp;
+    let index;
+
+    while (count > 0) {
+      index = Math.floor(Math.random() * count);
+      count -= 1;
+
+      temp = newArray[count];
+      newArray[count] = newArray[index];
+      newArray[index] = temp;
+    }
+
+    return arr;
+  };
+
+  const sort = async (arr) => {
+    let sorted = false;
+    while (!sorted) {
+      newArray = shuffle(newArray);
+      // Cannot use promise array cause the probability of succes is 1/!N
+      // eslint-disable-next-line no-await-in-loop
+      await sleep(updateCallback, [...newArray], speed);
+      sorted = isSorted(arr);
+    }
+    return newArray;
+  };
+  return sort(newArray);
 };

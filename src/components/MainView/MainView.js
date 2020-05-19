@@ -8,6 +8,7 @@ import {
   BubbleSort,
   InsertSort,
   QuickSort,
+  ComboSort,
 } from '../../utils/Algorithms';
 
 export default function MainView() {
@@ -28,13 +29,10 @@ export default function MainView() {
     );
   }, [sortingElements]);
 
-  const handleChangeAlgorithm = (event) => {
-    setCurrentAlgorithm(event.target.value);
-  };
-
   const handleStartSorting = () => {
     if (currentAlgorith === null) {
-      alert('No algorithm selected.');
+      ComboSort(boardData, setBoardData, sortingSpeed);
+      // alert('No algorithm selected.');
     } else {
       switch (currentAlgorith) {
         case 'selection':
@@ -49,6 +47,9 @@ export default function MainView() {
         case 'quick':
           QuickSort(boardData, setBoardData, sortingSpeed);
           break;
+        case 'combo':
+          ComboSort(boardData, setBoardData, sortingSpeed);
+          break;
         default:
           SelectionSort(boardData, setBoardData, sortingSpeed);
           break;
@@ -62,6 +63,10 @@ export default function MainView() {
         Math.floor(Math.random() * sortingElements),
       ),
     );
+  };
+  const handleChangeAlgorithm = (event) => {
+    handleRebuidArray();
+    setCurrentAlgorithm(event.target.value);
   };
 
   const handleChangeArraySize = (size) => {

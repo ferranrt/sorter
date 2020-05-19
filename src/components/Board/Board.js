@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Board.module.scss';
 
@@ -7,7 +7,7 @@ const generateKey = (pre) => {
 };
 
 export default function Board(props) {
-  const { speed, data } = props;
+  const { data } = props;
 
   return (
     <div className={styles.root}>
@@ -24,12 +24,9 @@ export default function Board(props) {
 }
 
 Board.defaultProps = {
-  speed: 20,
   data: [],
 };
 
 Board.propTypes = {
-  speed: PropTypes.number,
-  // eslint-disable-next-line react/forbid-prop-types
   data: PropTypes.array,
 };

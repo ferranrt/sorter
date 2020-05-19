@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Slider from '@material-ui/core/Slider';
-import styles from './Picker.module.scss';
+import styles from './MySlider.module.scss';
 
-export default function Picker(props) {
+export default function MySlider(props) {
   const { label, min, max, onChangeValue, def, sufix } = props;
   const [displayValue, setDisplayValue] = useState(def);
   const handleValueChange = (value) => {
@@ -30,7 +30,7 @@ export default function Picker(props) {
   );
 }
 
-Picker.defaultProps = {
+MySlider.defaultProps = {
   label: 'Empty Label',
   min: 1,
   max: 100,
@@ -38,7 +38,7 @@ Picker.defaultProps = {
   sufix: '',
   onChangeValue: () => {},
 };
-Picker.propTypes = {
+MySlider.propTypes = {
   label: PropTypes.string,
   min: PropTypes.number,
   max: PropTypes.number,

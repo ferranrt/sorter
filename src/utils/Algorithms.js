@@ -120,3 +120,43 @@ export const QuickSort = (
   recursiveSort(0, unsortedArray.length - 1);
   Promise.all(promises);
 };
+
+export const ComboSort = (unsortedArray, updateCallback, speed) => {
+  const newArray = [...unsortedArray];
+  const promises = [];
+  let delayOffset = 1;
+  const isArraySorted = (arr) => {
+    let sorted = true;
+    for (let i = 0; i < arr.length - 1; i++) {
+      if (arr[i] > arr[i + 1]) {
+        sorted = false;
+        break;
+      }
+    }
+    return sorted;
+  };
+  let iterationCount = 0;
+  let gap = newArray.length - 2;
+  const decreaseFactor = 1.25;
+  while (!isArraySorted(newArray)) {
+    if (iterationCount > 0)
+      gap = gap === 1 ? gap : Math.floor(gap / decreaseFactor);
+    let front = 0;
+    let back = gap;
+    while (back <= newArray.length - 1) {
+      if (newArray[front] > newArray[back]) {
+        const temp = newArray[front];
+        newArray[front] = newArray[back];
+        newArray[back] = temp;
+        delayOffset += 1;
+        promises.push(
+          sleep(updateCallback, [...newArray], speed * delayOffset),
+        );
+      }
+      front += 1;
+      back += 1;
+    }
+    iterationCount += 1;
+  }
+  Promise.all(promises);
+};

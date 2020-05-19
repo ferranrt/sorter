@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
@@ -7,7 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import styles from './Header.module.scss';
-import Picker from '../Picker/Picker';
+import Slider from '../MySlider/MySlider';
 
 export default function Header(props) {
   const {
@@ -24,7 +23,7 @@ export default function Header(props) {
     <div className={styles.root}>
       <div className={classnames(styles.column, styles.algorithmContainer)}>
         <div className={styles.box}>
-          <Select defaultValue="null" onChange={onChangeAlgorithm}>
+          <Select fullWidth defaultValue="null" onChange={onChangeAlgorithm}>
             <MenuItem value="null" disabled>
               Choose a sorting algorithm
             </MenuItem>
@@ -32,12 +31,13 @@ export default function Header(props) {
             <MenuItem value="selection">Selection Sort</MenuItem>
             <MenuItem value="quick">Quick Sort</MenuItem>
             <MenuItem value="bubble">Bubble Sort</MenuItem>
+            <MenuItem value="combo">Combo Sort</MenuItem>
           </Select>
         </div>
       </div>
 
       <div className={classnames(styles.column, styles.slidersContainer)}>
-        <Picker
+        <Slider
           min={5}
           max={200}
           def={defaultSize}
@@ -45,7 +45,7 @@ export default function Header(props) {
           label="Array Size"
           sufix="items"
         />
-        <Picker
+        <Slider
           onChangeValue={onChangeSortingSpeed}
           min={5}
           max={50}

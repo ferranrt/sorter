@@ -34,6 +34,7 @@ export default function MainView() {
 
   const handleStartSorting = () => {
     if (currentAlgorith === null) {
+      // eslint-disable-next-line no-alert
       alert('No algorithm selected.');
     } else {
       switch (currentAlgorith) {

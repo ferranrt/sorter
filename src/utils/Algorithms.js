@@ -264,7 +264,7 @@ export const ShellSort = (unsortedArray, updateCallback, speed) => {
     if (increment === 2) {
       increment = 1;
     } else {
-      increment = parseInt((increment * 5) / 11);
+      increment = parseInt((increment * 5) / 11, 10);
     }
   }
   Promise.all(promises);
